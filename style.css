@@ -2,6 +2,9 @@
 
 :root {
   --dark-blue: #363f5f;
+  --green: #49aa26;
+  --light-green: #3dd705;
+  --red: #e92929;
 }
 
 * {
@@ -10,9 +13,25 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 93.75%;
+}
+
 body {
   background: #f0f2f5;
   font-family: 'Poppins', sans-serif;
+}
+
+.sr-only { /* Esconde o objeto - esta estrategia esta sendo aplicada para não interferir nos leitores de tela*/
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 .container {
@@ -28,6 +47,58 @@ h2 {
   color: var(--dark-blue);
 
   font-weight: normal;
+}
+
+/* Links and Buttons ================================= */
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+button {
+  width: 48%;
+  height: 50px;
+  border: none;
+  color: white;
+  background: var(--green);
+
+  padding: 0;
+  border-radius: 0.25rem;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--light-green);
+}
+
+.button.new { /* ".button.new -> ele aplicará se a mesma caixa tiver button e new "*/
+  display: inline-block;
+  margin-bottom: .8rem;
+}
+
+.button.cancel {
+  color: var(--red);
+  border: 2px var(--red) solid;
+  border-radius: 0.25rem;
+
+  width: 48%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.6;
+}
+
+.button.cancel:hover {
+  opacity: 1;
 }
 
 /* Header ================================= */
@@ -68,6 +139,10 @@ header {
 .card h3 {
   font-weight: normal;
   font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card p {
@@ -84,16 +159,26 @@ header {
 
 /* Table ================================= */
 
+#transaction {
+  display: block;
+  width: 100%;
+  overflow-x: auto; /*cria uma barra de rolagem qd necessário*/
+}
+
 #data-table {
   width: 100%;
   border-spacing: 0 0.5rem;
-
   color: #969cb3;
 }
 
 table thead tr th:first-child,
 table thead tr td:first-child {
   border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table thead tr td:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
 table thead th {
@@ -131,6 +216,77 @@ td.expense {
   color: #e92929
 }
 
+/* Modal ================================= */
+
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: #f0f2f5;
+  padding: 2.4rem;
+  width: 90%;
+  max-width: 500px;
+
+  border-radius: 0.25rem;
+  
+  position: relative;
+  z-index: 1;
+
+}
+
+/* Form ================================= */
+
+#form {
+  max-width: 500px;
+}
+
+#form h2 {
+  margin-top: 0;
+}
+
+#form form input {
+  border: none;
+  border-radius: 0.2rem;
+
+  padding: 0.8rem;
+
+  width: 100%;
+}
+
+.input-group {
+  margin-top: 0.8rem;
+}
+
+.input-group small {
+  opacity: 0.4;
+}
+
+.input-group.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 /* Footer ================================= */
 
@@ -140,4 +296,23 @@ footer {
   color: var(--dark-blue);
 
   opacity: 0.6;
+}
+
+/* ### ########## ### */
+/* ### Responsive ### ================================= */
+/* ### ########## ### */
+
+@media (min-width: 800px) {
+
+  html {
+    font-size: 87.5%;
+  }
+
+  #balance {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+
+  }
+
 }
